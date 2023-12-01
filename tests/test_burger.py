@@ -1,3 +1,4 @@
+import pytest
 from unittest.mock import Mock
 from unittest.mock import patch
 from praktikum.burger import Burger
@@ -21,13 +22,17 @@ class TestBurger:
         burger.add_ingredient(mock_ingredient)
         assert burger.ingredients == [mock_ingredient]
 
-    def test_remove_ingredient(self):
+    @pytest.mark.parametrize('value', [1, 'Соус Spicy-X'])
+    def test_remove_ingredient(self, value):
         mock_ingredient_1 = Mock()
         mock_ingredient_2 = Mock()
         burger = Burger()
         burger.ingredients = [mock_ingredient_1, mock_ingredient_2]
-        burger.remove_ingredient(1)
-        assert burger.ingredients == [mock_ingredient_1]
+        try:
+            burger.remove_ingredient(value)
+            assert burger.ingredients == [mock_ingredient_1]
+        except TypeError:
+            assert burger.ingredients == [mock_ingredient_1, mock_ingredient_2]
 
     def test_move_ingredient(self):
         mock_ingredient_1 = Mock()
