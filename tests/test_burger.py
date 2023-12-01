@@ -37,6 +37,14 @@ class TestBurger:
         burger.move_ingredient(1, 0)
         assert burger.ingredients == [mock_ingredient_2, mock_ingredient_1]
 
+    def test_negative_move_ingredient(self):
+        mock_ingredient_1 = Mock()
+        mock_ingredient_2 = Mock()
+        burger = Burger()
+        burger.ingredients = [mock_ingredient_1, mock_ingredient_2]
+        burger.move_ingredient(0, 0)
+        assert burger.ingredients == [mock_ingredient_1, mock_ingredient_2]
+
     def test_get_price(self):
         mock_bun = Mock()
         mock_bun.get_price.return_value = 1255
