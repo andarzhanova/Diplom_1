@@ -50,8 +50,8 @@ class TestBurger:
         burger = Burger()
         burger.bun = mock_bun
         burger.ingredients = [mock_ingredient_1, mock_ingredient_2]
-
-        assert burger.get_price() == 7000
+        price = 2 * mock_bun.get_price() + mock_ingredient_1.get_price() + mock_ingredient_2.get_price()
+        assert burger.get_price() == price
 
     @patch('praktikum.burger.Burger.get_price', return_value=7000)
     def test_get_receipt(self, mock_get_price):
